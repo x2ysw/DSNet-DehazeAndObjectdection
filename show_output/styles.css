@@ -1,0 +1,160 @@
+body {
+    background-color: #1a1a1a;
+    color: #ffffff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 20px;
+    font-size: 2.5em;
+    color: #00ff99;
+    text-shadow: 0 0 10px #00ff99;
+}
+
+.images-container {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.image-box {
+    width: 30%;
+}
+
+.image-box h2 {
+    font-size: 1.5em;
+    color: #00ccff;
+    text-shadow: 0 0 10px #00ccff;
+    margin-bottom: 10px;
+}
+
+.image-box img {
+    width: 100%;
+    border: 2px solid #00ff99;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 255, 153, 0.5);
+}
+
+.progress-container {
+    margin-top: 20px;
+}
+body {
+    background-color: #1a1a1a;
+    color: #ffffff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    margin: 0;
+}
+
+.container {
+    text-align: center;
+    width: 80%;
+}
+
+h1 {
+    margin-bottom: 20px;
+    font-size: 2.5em;
+    color: #00ff99;
+    text-shadow: 0 0 10px #00ff99;
+}
+
+input[type="file"], button {
+    margin: 10px;
+    padding: 10px;
+    font-size: 1em;
+}
+
+button {
+    background-color: #00ff99;
+    border: none;
+    border-radius: 5px;
+    color: #1a1a1a;
+    cursor: pointer;
+    box-shadow: 0 0 10px #00ff99;
+}
+
+button:hover {
+    background-color: #00cc7a;
+}
+
+.images-container {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.image-box {
+    width: 30%;
+}
+
+.image-box h2 {
+    font-size: 1.5em;
+    color: #00ccff;
+    text-shadow: 0 0 10px #00ccff;
+    margin-bottom: 10px;
+}
+
+.image-box img {
+    width: 100%;
+    border: 2px solid #00ff99;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 255, 153, 0.5);
+}
+
+.progress-container {
+    margin-top: 20px;
+    width: 100%;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 25px;
+    background-color: #333;
+    border-radius: 5px;
+    overflow: hidden;
+    margin: 0 auto;
+    box-shadow: 0 0 20px rgba(0, 255, 153, 0.5);
+}
+
+.progress {
+    width: 0;
+    height: 100%;
+    background-color: #00ff99;
+    box-shadow: 0 0 10px #00ff99;
+    transition: width 0.5s;
+}
+
+.progress-bar {
+    width: 80%;
+    height: 25px;
+    background-color: #333;
+    border-radius: 5px;
+    overflow: hidden;
+    margin: 0 auto;
+    box-shadow: 0 0 20px rgba(0, 255, 153, 0.5);
+}
+
+.progress {
+    width: 0;
+    height: 100%;
+    background-color: #00ff99;
+    box-shadow: 0 0 10px #00ff99;
+    animation: progress-animation 5s linear forwards;
+}
+
+@keyframes progress-animation {
+    0% { width: 0; }
+    100% { width: 100%; }
+}
