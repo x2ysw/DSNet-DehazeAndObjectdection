@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fog Removal and Object Detection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .file-upload {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        input[type="file"] {
+            display: none;
+        }
+        .file-upload label {
+            display: inline-block;
+            padding: 10px 20px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        .file-upload label:hover {
+            background-color: #0056b3;
+        }
+        button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .image-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+        .image-container div {
+            flex: 1 1 30%;
+            margin: 10px;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .image-container img {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .image-container h3 {
+            text-align: center;
+            color: #555;
+        }
+        .progress-bar {
+            width: 100%;
+            background-color: #f3f3f3;
+            border-radius: 4px;
+            margin-top: 20px;
+        }
+        .progress-bar-inner {
+            height: 20px;
+            width: 0;
+            background-color: #007bff;
+            border-radius: 4px;
+            text-align: center;
+            color: white;
+            line-height: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Fog Removal and Object Detection</h1>
+        <div class="file-upload">
+            <input type="file" id="inputImage" accept="image/*">
+            <label for="inputImage">Choose an Image</label>
+            <button onclick="processImage()">Upload and Process</button>
+        </div>
+        <div class="progress-bar">
+            <div class="progress-bar-inner" id="progressBar">0%</div>
+        </div>
+        <div class="image-container">
+            <div>
+                <h3>Original Image</h3>
+                <img id="originalImage" src="" alt="Original Image">
+            </div>
+            <div>
+                <h3>Dehazed Image</h3>
+                <img id="dehazedImage" src="" alt="Dehazed Image">
+            </div>
+            <div>
+                <h3>Object Detection Image</h3>
+                <img id="detectionImage" src="" alt="Detection Image">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function processImage() {
+            const input = document.getElementById('inputImage');
+            const progressBar = document.getElementById('progressBar');
+
+            if (input.files && input.files[0]) {
+                const file = input.files[0];
+                const formData = new FormData();
+                formData.append('image', file);
+
+                // Display the original image
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('originalImage').src = e.target.result;
+                }
+                reader.readAsDataURL(file);
+
+                // Initialize the progress bar
+                progressBar.style.width = '0%';
+                progressBar.textContent = '0%';
+
+                // Send the image to the backend API for processing
+                const response = await fetch('http://localhost:5000/process_image', {
+                    method: 'POST',
+                    body: formData,
+                    onUploadProgress: function(progressEvent) {
+                        if (progressEvent.lengthComputable) {
+                            const percentCompleted = Math.round((progressEvent.loaded / progressEvent.total) * 100);
+                            progressBar.style.width = percentCompleted + '%';
+                            progressBar.textContent = percentCompleted + '%';
+                        }
+                    }
+                });
+
+                const data = await response.json();
+                document.getElementById('dehazedImage').src = 'data:image/jpeg;base64,' + data.dehazed;
+                document.getElementById('detectionImage').src = 'data:image/jpeg;base64,' + data.detected;
+
+                // Complete the progress bar
+                progressBar.style.width = '100%';
+                progressBar.textContent = '100%';
+            } else {
+                alert('Please select an image file.');
+            }
+        }
+    </script>
+</body>
+</html>
