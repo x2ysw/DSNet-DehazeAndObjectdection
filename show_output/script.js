@@ -1,3 +1,5 @@
+//进度条
+
 document.addEventListener("DOMContentLoaded", function() {
     const imageUpload = document.getElementById("imageUpload");
     const uploadButton = document.getElementById("uploadButton");
