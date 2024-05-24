@@ -43,12 +43,18 @@ def load_reside_dataset(data_dir, resize_shape=(256, 256)):
     return np.array(haze_images), np.array(clear_images)
 
 # 设置 RESIDE 数据集的根目录
-reside_data_dir = "D:\dehaze2\SOTS\SOTS\outdoor\outdoor"
+reside_data_dir = "C:\\Users\DELL\Desktop\SOTS\SOTS\outdoor\outdoor"
 
 
 # 加载 RESIDE 数据集
 haze_images, clear_images = load_reside_dataset(reside_data_dir)
 
 # 打印数据集的形状
+print("雾天图像数组形状：", haze_images.shape)
+print("非雾天图像数组形状：", clear_images.shape)
+
+
+load_reside_dataset(reside_data_dir)
+
 print("雾天图像数组形状：", haze_images.shape)
 print("非雾天图像数组形状：", clear_images.shape)
