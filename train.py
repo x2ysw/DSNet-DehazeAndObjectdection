@@ -7,6 +7,7 @@ from torch.utils.data import DataLoader
 from data.dataset import RESIDEDetectionDataset
 from models.dsnet import DSNet
 import torchvision.transforms as transforms
+import torch.nn as nn
 
 # 设置设备
 device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
