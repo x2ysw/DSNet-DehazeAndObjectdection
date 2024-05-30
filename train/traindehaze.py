@@ -1,10 +1,13 @@
 import torch.optim as optim
 import torch.nn as nn
-
-# 定义损失函数和优化器
 from models import dehazing_net
 from models.dehazing_net import device
-from data.pre-dehaze import dehaze_dataloader
+from data.predehaze import dehaze_dataloader
+"""
+    去雾训练
+"""
+
+# 定义损失函数和优化器
 criterion = nn.MSELoss()
 optimizer = optim.Adam(dehazing_net.parameters(), lr=0.001)
 num_epochs = 10
