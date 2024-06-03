@@ -19,7 +19,7 @@ transform = transforms.Compose([
 ])
 
 # 创建数据集和数据加载器
-train_dataset = RESIDEDetectionDataset(hazy_dir='datasets/RESIDE/ITS/hazy', clear_dir='datasets/RESIDE/ITS/clear',
+train_dataset = RESIDEDetectionDataset(hazy_dir='C:\\Users\\DELL\\Desktop\\ITS_v2\\hazy\\hazy', clear_dir='C:\\Users\\DELL\\Desktop\\ITS_v2\\clear\\clear',
                                        ann_dir='datasets/VOC/Annotations', transform=transform)
 train_dataloader = DataLoader(train_dataset, batch_size=4, shuffle=True, collate_fn=lambda x: tuple(zip(*x)))
 
@@ -30,6 +30,8 @@ model.to(device)
 # 定义优化器
 optimizer = optim.Adam(model.parameters(), lr=0.001)
 num_epochs = 10
+
+
 
 # 训练过程
 for epoch in range(num_epochs):
